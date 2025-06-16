@@ -1,217 +1,198 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Paella Tours</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Paella Tours</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(145deg, #8be3f9, #e0c3fc);
+      color: #333;
+      text-align: center;
+    }
 
-  body {
-    margin: 0;
-    font-family: 'Fredoka One', cursive, Arial, sans-serif;
-    background: linear-gradient(to bottom, #73c8f8, #1d9de0);
-    color: #fff;
-    text-align: center;
-    overflow-x: hidden;
-    user-select: none;
-  }
+    header {
+      background: #ffcf33;
+      padding: 30px 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
 
-  .container {
-    max-width: 400px;
-    margin: 30px auto 0 auto;
-    position: relative;
-  }
+    h1 {
+      font-size: 3.5em;
+      color: #222;
+      text-shadow: 2px 2px #fff;
+    }
 
-  h1 {
-    font-size: 4.5rem;
-    margin: 10px 0 20px;
-    text-shadow: 3px 3px 0 #0a2f55, 6px 6px 0 #45a1ff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-  }
+    h1 .emoji {
+      font-size: 1.2em;
+    }
 
-  h1 .globe {
-    width: 48px;
-    height: 48px;
-    background: url('https://cdn-icons-png.flaticon.com/512/888/888870.png') no-repeat center / contain;
-    filter: drop-shadow(2px 2px 1px #0a2f55);
-  }
+    .subtitle {
+      font-size: 1.2em;
+      color: #555;
+      margin-top: 10px;
+    }
 
-  /* Botones grandes */
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    font-size: 1.8rem;
-    border-radius: 12px;
-    padding: 12px 30px;
-    margin: 12px auto;
-    cursor: pointer;
-    user-select: none;
-    box-shadow: 0 4px 0 #12416c;
-    transition: transform 0.1s ease-in-out;
-  }
-  .btn:active {
-    transform: translateY(2px);
-    box-shadow: none;
-  }
+    .music-toggle {
+      background-color: #fff;
+      border: none;
+      padding: 10px 20px;
+      margin: 20px auto;
+      font-size: 1em;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
 
-  .btn-yellow {
-    background: #f5b700;
-    color: #003366;
-    border: 3px solid #b47a00;
-  }
-  .btn-yellow i {
-    margin-right: 10px;
-    font-size: 1.6rem;
-  }
+    section {
+      padding: 40px 20px;
+    }
 
-  .btn-gems800 {
-    background: #f5b700;
-    color: #003366;
-    border: 4px solid #b47a00;
-    font-weight: 900;
-  }
+    .box {
+      background-color: #ffffffdd;
+      border-radius: 15px;
+      padding: 30px;
+      margin: 20px auto;
+      width: 80%;
+      max-width: 600px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
 
-  .btn-gems1600 {
-    background: linear-gradient(90deg, #ff3c00 0%, #0050ff 100%);
-    color: #fff;
-    border: 4px solid #7c0000;
-    font-weight: 900;
-  }
+    ul.user-list {
+      list-style: none;
+      padding: 0;
+    }
 
-  /* Texto amarillo */
-  .info-text {
-    font-style: italic;
-    font-weight: 600;
-    font-size: 1.1rem;
-    margin: 6px 0 18px;
-    color: #ffd500;
-    text-shadow: 1px 1px 1px #6a3d00;
-  }
+    li {
+      margin: 10px 0;
+    }
 
-  /* Personaje estilo Stumble Guys  */
-  .character {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    width: 100px;
-    user-select: none;
-    pointer-events: none;
-    filter: drop-shadow(0 3px 2px rgba(0,0,0,0.3));
-  }
+    .claimed {
+      color: green;
+      font-weight: bold;
+      margin-left: 10px;
+    }
 
-  /* Texto desbloqueo */
-  .unlock-text {
-    margin-top: 40px;
-    font-size: 1rem;
-    color: #fff;
-    font-weight: 700;
-    text-shadow: 1px 1px 2px #000;
-    user-select: none;
-  }
+    .edit-warning {
+      margin-top: 20px;
+      font-style: italic;
+      color: #d35400;
+    }
 
-  .unlock-text span.highlight {
-    color: #ffd500;
-    font-style: italic;
-  }
-
-  /* Editable content styles */
-  #editable-content {
-    outline: none;
-    border-radius: 10px;
-    padding: 12px 20px;
-    margin: 20px auto;
-    background: rgba(255 255 255 / 0.2);
-    box-shadow: 0 0 8px 2px rgba(255 213 0, 0.8);
-    max-width: 350px;
-    cursor: text;
-  }
-</style>
+    footer {
+      font-size: 0.9em;
+      padding: 20px;
+      color: #777;
+    }
+  </style>
 </head>
 <body>
 
-<div class="container">
-  <h1><div class="globe" aria-hidden="true"></div>PAELLA TOURS</h1>
+  <!-- 🎵 Música de fondo -->
+  <audio id="bg-music" autoplay loop>
+    <source src="https://cdn.pixabay.com/audio/2023/10/09/audio_4ba616312a.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
 
-  <button id="btn-music" class="btn btn-yellow" onclick="toggleMusic()" aria-label="Toggle Music">
-    <i id="music-icon" class="fas fa-volume-up"></i> Mute Music
+  <header>
+    <h1><span class="emoji">💎🔥🎮</span> PAELLA TOURS <span class="emoji">🎮🔥💎</span></h1>
+    <p class="subtitle">Only the worthy can claim their gems</p>
+  </header>
+
+  <button id="toggleButton" class="music-toggle" onclick="toggleMusic()">
+    <i class="fas fa-volume-up"></i> Mute Music
   </button>
 
-  <div id="editable-content" contenteditable="false" aria-label="Gems Categories">
-    <button class="btn btn-gems800" type="button" tabindex="0">
-      ⭐ 800 GEMS
-    </button>
-    <p class="info-text">No users tisted in this category yet</p>
+  <section>
+    <div class="box">
+      <h2>🌟 800 GEMS</h2>
+      <ul class="user-list">
+        <li><span class="username">jamoncin</span> <button onclick="claim('jamoncin')">Claim</button></li>
+        <li><span class="username">sergi</span> <button onclick="claim('sergi')">Claim</button></li>
+      </ul>
+    </div>
 
-    <button class="btn btn-gems1600" type="button" tabindex="0">
-      💎 1600 GEMS
-    </button>
-    <p class="info-text">Users listed in this category yet.</p>
-  </div>
+    <div class="box">
+      <h2>💠 1600 GEMS</h2>
+      <ul class="user-list">
+        <li><i>No users listed yet...</i></li>
+      </ul>
+    </div>
 
-  <p class="unlock-text">
-    Only <span class="highlight">😊</span> Press <span class="highlight">Ctrl+E</span> and enter yer password to unlock
-  </p>
-</div>
+    <p class="edit-warning">🔒 Only the site owner can edit this page (press Ctrl + E)</p>
+  </section>
 
-<img class="character" src="https://i.imgur.com/M1CmDCR.png" alt="Stumble Guys Character" />
+  <footer>
+    &copy; 2025 Mega Tours — All rights reserved.
+  </footer>
 
-<audio id="bg-music" loop autoplay>
-  <source src="https://cdn.pixabay.com/audio/2023/10/09/audio_4ba616312a.mp3" type="audio/mpeg" />
-  Your browser does not support the audio element.
-</audio>
+  <script>
+    const music = document.getElementById('bg-music');
+    const button = document.getElementById('toggleButton');
+    const users = {
+      jamoncin: "jamogem",
+      sergi: "sergemester"
+    };
 
-<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-<script>
-  const music = document.getElementById('bg-music');
-  const btnMusic = document.getElementById('btn-music');
-  const musicIcon = document.getElementById('music-icon');
-  const editableContent = document.getElementById('editable-content');
-
-  // Toggle music playback & button text/icon
-  function toggleMusic() {
-    if (music.paused) {
-      music.play();
-      musicIcon.className = "fas fa-volume-up";
-      btnMusic.textContent = " Mute Music";
-      btnMusic.prepend(musicIcon);
-    } else {
-      music.pause();
-      musicIcon.className = "fas fa-volume-mute";
-      btnMusic.textContent = " Play Music";
-      btnMusic.prepend(musicIcon);
-    }
-  }
-
-  // Handle Ctrl+E to unlock editing
-  document.addEventListener('keydown', function(e) {
-    if (e.ctrlKey && (e.key === 'e' || e.key === 'E')) {
-      e.preventDefault();
-      const password = prompt('Enter password to unlock editing:');
-      if (password === 'NOOB-CORP-Sergi') {
-        editableContent.contentEditable = "true";
-        alert('Editing enabled! Make your changes. Press Ctrl+S to save (reload page to discard).');
-        editableContent.focus();
+    function toggleMusic() {
+      if (music.paused) {
+        music.play();
+        button.innerHTML = '<i class="fas fa-volume-up"></i> Mute Music';
       } else {
-        alert('Incorrect password!');
+        music.pause();
+        button.innerHTML = '<i class="fas fa-volume-mute"></i> Play Music';
       }
     }
 
-    // Optional: Ctrl+S to "save" and disable editing
-    if (e.ctrlKey && (e.key === 's' || e.key === 'S')) {
-      if (editableContent.isContentEditable) {
-        e.preventDefault();
-        editableContent.contentEditable = "false";
-        alert('Editing disabled. Reload page to discard changes.');
+    function claim(username) {
+      const pass = prompt(`Enter password for ${username}`);
+      if (pass === users[username]) {
+        const key = "claimed_" + username;
+        localStorage.setItem(key, "true");
+        updateClaims();
+      } else {
+        alert("❌ Incorrect password!");
       }
     }
-  });
-</script>
+
+    function updateClaims() {
+      document.querySelectorAll(".user-list li").forEach(li => {
+        const nameSpan = li.querySelector(".username");
+        const username = nameSpan.textContent.trim();
+        const key = "claimed_" + username;
+
+        if (localStorage.getItem(key) === "true") {
+          if (!li.querySelector(".claimed")) {
+            const tag = document.createElement("span");
+            tag.textContent = "✅ Claimed";
+            tag.className = "claimed";
+            li.appendChild(tag);
+          }
+        }
+      });
+    }
+
+    updateClaims();
+
+    // Edit mode
+    document.addEventListener("keydown", function(e) {
+      if (e.ctrlKey && e.key === "e") {
+        const pw = prompt("Enter admin password:");
+        if (pw === "NOOB-CORP-Sergi") {
+          alert("✅ Edit mode activated. You can now modify the content.");
+          document.body.contentEditable = true;
+        } else {
+          alert("❌ Incorrect admin password.");
+        }
+      }
+    });
+  </script>
 
 </body>
 </html>
